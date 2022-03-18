@@ -15,14 +15,21 @@
           type="text"
           placeholder="Email"
         />
-        <button class="btn btn-primary">Sauvegarder</button>
+        <button
+          @click="deleteUser(user._id)"
+          type="button"
+          class="btn btn-primary"
+        >
+          Supprimer
+        </button>
       </form>
     </div>
     <div class="p-20">
       <h3>Liste des utilisateurs</h3>
       <ul>
         <li v-for="user in state.users">
-          <p>{{ user.name }} - {{ user.email }}</p>
+          <p class="mr-10">{{ user.name }} - {{ user.email }}</p>
+          <button class="btn btn-danger">Sauvegarder</button>
         </li>
       </ul>
     </div>
@@ -72,6 +79,22 @@ async function fetchUsers() {
     const users: User | User[] = await response.json();
     if (users) {
       state.users = Array.isArray(users) ? users : [users];
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deleteUser(userId?: string) {
+  try {
+    if (userId) {
+      const response = await fetch(
+        `https://restapi.fr/api/vueusers?${userId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      state.users = state.users.filter((user) => user._id !== userId);
     }
   } catch (err) {
     console.error(err);
