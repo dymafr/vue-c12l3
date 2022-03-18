@@ -47,7 +47,7 @@ interface User {
   _id?: string;
 }
 
-const state = reactive({
+const state = reactive<{ users: User[] }>({
   users: [],
 });
 
