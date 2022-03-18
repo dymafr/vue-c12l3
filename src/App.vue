@@ -88,12 +88,9 @@ async function fetchUsers() {
 async function deleteUser(userId?: string) {
   try {
     if (userId) {
-      const response = await fetch(
-        `https://restapi.fr/api/vueusers?id=${userId}`,
-        {
-          method: 'DELETE',
-        }
-      );
+      await fetch(`https://restapi.fr/api/vueusers?id=${userId}`, {
+        method: 'DELETE',
+      });
       state.users = state.users.filter((user) => user._id !== userId);
     }
   } catch (err) {
