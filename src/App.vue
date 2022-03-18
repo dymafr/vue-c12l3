@@ -48,7 +48,7 @@ const { handleSubmit, resetForm } = useForm();
 
 const mySubmit = handleSubmit(async (value) => {
   try {
-    const response = await fetch('https://restapi.fr/api/vueuser', {
+    const response = await fetch('https://restapi.fr/api/vueusers', {
       method: 'POST',
       body: JSON.stringify(value),
       headers: {
@@ -65,6 +65,15 @@ const mySubmit = handleSubmit(async (value) => {
 
 const { value: emailValue } = useField('email');
 const { value: nameValue } = useField('name');
+
+function fetchUsers() {
+  try {
+    const response = await fetch('https://restapi.fr/api/vueusers');
+    const users: User | User[] = await response.json();
+  } catch (err) {
+    console.error(err);
+  }
+}
 </script>
 
 <style lang="scss">
