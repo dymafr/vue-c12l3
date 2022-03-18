@@ -15,13 +15,7 @@
           type="text"
           placeholder="Email"
         />
-        <button
-          @click="deleteUser(user._id)"
-          type="button"
-          class="btn btn-primary"
-        >
-          Supprimer
-        </button>
+        <button class="btn btn-primary">Sauvegarder</button>
       </form>
     </div>
     <div class="p-20">
@@ -29,7 +23,13 @@
       <ul>
         <li v-for="user in state.users">
           <p class="mr-10">{{ user.name }} - {{ user.email }}</p>
-          <button class="btn btn-danger">Sauvegarder</button>
+          <button
+            @click="deleteUser(user._id)"
+            type="button"
+            class="btn btn-danger"
+          >
+            Supprimer
+          </button>
         </li>
       </ul>
     </div>
