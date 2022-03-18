@@ -66,14 +66,19 @@ const mySubmit = handleSubmit(async (value) => {
 const { value: emailValue } = useField('email');
 const { value: nameValue } = useField('name');
 
-function fetchUsers() {
+async function fetchUsers() {
   try {
     const response = await fetch('https://restapi.fr/api/vueusers');
     const users: User | User[] = await response.json();
+    if (users) {
+      state.users = Array.isArray(users) ? users : [users];
+    }
   } catch (err) {
     console.error(err);
   }
 }
+
+fetchUsers();
 </script>
 
 <style lang="scss">
