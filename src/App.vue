@@ -62,7 +62,7 @@ const mySubmit = handleSubmit(async (value) => {
         'Content-Type': 'application/json',
       },
     });
-    const user = await response.json();
+    const user: User = await response.json();
     state.users.push(user);
     resetForm();
   } catch (err) {
